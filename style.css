@@ -1,0 +1,395 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fce8e6;
+  background: radial-gradient(
+    circle at center,
+    #144b8c 0%,
+    #0a3161 50%,
+    #031730 100%
+  );
+}
+
+/* Estrutura Principal do Header */
+.app-header {
+  background-color: #0a3161; /* Azul oficial da bandeira dos EUA */
+  border-bottom: 3px solid #cc243c; /* Linha fina em vermelho vibrante para dar acabamento */
+  box-shadow: 0 4px 12px rgba(3, 23, 48, 0.3); /* Sombra sutil usando o azul escuro */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* Container de Alinhamento (Limita a largura máxima em telas grandes) */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Área da Marca (Logo + Texto) */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px; /* Arredondado moderno combinando com o ícone */
+  object-fit: cover;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.brand-subtitle {
+  color: #a0c2ed; /* Azul claro para dar contraste e não brigar com o título */
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase; /* DEIXA A LETRA MAIÚSCULA */
+}
+
+/* Links de Navegação */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #a0c2ed; /* Cor de destaque ao passar o mouse */
+}
+
+/* Botão de Destaque (Meu Perfil) */
+.nav-btn {
+  background-color: #cc243c; /* Vermelho vibrante */
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.nav-btn:hover {
+  background-color: #a61d31; /* Vermelho um pouco mais escuro no hover */
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* 📱 Responsividade para Celulares */
+@media (max-width: 600px) {
+  .header-container {
+    padding: 12px 15px;
+  }
+
+  .brand-subtitle {
+    display: none; /* Esconde o subtítulo em telas muito pequenas para poupar espaço */
+  }
+
+  .header-nav {
+    gap: 12px; /* Aproxima os links no mobile */
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+  }
+
+  .nav-btn {
+    padding: 6px 12px;
+  }
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+header {
+  background: #1565c0;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px;
+  overflow-x: auto;
+  border-bottom: 1.5px solid #a0c2ed;
+}
+
+.menu button {
+  border: none;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+}
+button {
+  /* -- button das palavras escondidas --*/
+  border-radius: 6px;
+}
+
+header h1 {
+  margin-left: 0px;
+  font-size: 28px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-top: 30px;
+}
+p {
+  margin: 0px 0px 7px;
+  opacity: 0.9;
+}
+
+.card {
+  background: #1a3259;
+  margin-top: 20px;
+  padding: 22px;
+  border-radius: 15px;
+  /*box-shadow: -2px 10px 17px 0px rgb(185 175 175 / 8%);*/
+}
+
+.texto {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 100px;
+  font-size: 20px;
+  border-radius: 10px;
+  line-height: 1.8;
+  text-indent: 15px; /* PARA DAR ESPAÇO DO PARAGRAFO */
+  /* user-select: text;*/
+  /* text-transform: uppercase; | CÓDIGO DEIXA A LETRA MAIÚCULA */
+}
+
+.instrucao {
+  color: #fce8e6;
+  font-size: 14px;
+  margin-top: 0px;
+  margin-left: 50px;
+}
+
+.acoes-texto {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.acoes-texto button {
+  flex: 1;
+  padding: 0px 0px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.controle-idioma {
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+}
+
+.controle-idioma button {
+  width: 50%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-selecionar {
+  background: #00a3ff;
+}
+
+.btn-limpar {
+  background-color: #fce8e6;
+  color: #d93025;
+}
+
+.btn-colar {
+  background-color: #e8f5e9;
+  color: #188038;
+}
+
+.btn-traduzir {
+  background: #ef6c00;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-ingles {
+  background: #fbbf24;
+}
+
+.btn-portugues {
+  background: #548235;
+}
+
+.controle-acoes {
+  display: flex;
+  gap: 5px;
+  margin-top: 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controle-velocidade button {
+  border-width: 1px;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 14px;
+  border-color: #fbbf24;
+  background-color: #fce8e6;
+  cursor: pointer;
+}
+
+.controle-velocidade {
+  margin-left: 0px;
+}
+
+span {
+  font-size: 14px;
+  color: #fbbf24;
+  margin-top: 10px;
+}
+
+.controle-repeticao button {
+  border-width: 1px;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 14px;
+  border-color: #fbbf24;
+  background-color: #fce8e6;
+  cursor: pointer;
+}
+
+.controle-repeticao {
+  display: flex;
+  gap: 10px;
+  margin-left: 0px;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.resultado {
+  margin-top: 20px;
+  padding: 18px;
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.rotulo-selecionado {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 8px;
+  margin-top: 0px;
+}
+
+.rotulo-traducao {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.selecionado {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3f3e3e;
+}
+
+.traducao {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #0b57d0;
+}
+.escondido {
+  /*display: none; */
+  margin-top: 15px;
+}
+/*-- ESTA ESCONDIDO DENTRO DA PALAVRA SALVA --*/
+.palavra-salva {
+  color: #fbbf24;
+  font-size: 18px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#listaFavoritos {
+  color: #f5f5f5;
+}
+
+favorito {
+  margin-top: 0px;
+  padding-top: 90px;
+}
+
+.item-favorito {
+  line-height: 30px;
+  margin-top: 0px;
+}
+linhaFavorito {
+  border: 1px solid white;
+  margin-bottom: 0px;
+}
+
+/* -- BOTÕES DOS FAVORITOS -- */
+.btn-ouvir-favorito {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-right: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}

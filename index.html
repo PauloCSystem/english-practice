@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="imagem/favicon.ico" type="image/x-icon">
+    <title>English Pratice</title>
+
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <!-- Lado Esquerdo: Logotipo e Nome do App -->
+            <div class="header-brand">
+                <!-- <img src="imagem/icoAppIng.png" alt="Ícone Pronúncia Master" class="header-logo"> -->
+                <img src="imagem/icoAppIng.png" alt="logotipo" style=" width:65px; height:65px;">
+                <div class="brand-text">
+                    <span class="brand-title">English Pratice</span>
+                    <span class="brand-subtitle">Inglês Americano</span>
+                </div>
+            </div>
+
+            <!-- Lado Direito: Menu de Navegação Rápida -->
+            <nav class="header-nav">
+                <a href="#licoes" class="nav-link active">Lições</a>
+                <a href="#cultura" class="nav-link">Cultura</a>
+                <a href="#perfil" class="nav-link nav-btn">Meu Perfil</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =====================================================
+         MENU PRINCIPAL
+         ===================================================== -->
+
+    <nav class="menu">
+
+        <!-- Botão que abre a página inicial -->
+        <button onclick="mostrarPagina('inicio')">🏠 Início</button>
+
+        <!-- Botão das palavras salvas -->
+        <button onclick="mostrarPagina('palavras')">⭐ Minhas palavras</button>
+
+        <!-- Botão da revisão -->
+        <button onclick="mostrarPagina('revisao')">🔄 Revisão </button>
+
+        <!-- Botão do quiz -->
+        <button onclick="mostrarPagina('quiz')">🧠 Quiz </button>
+
+    </nav>
+
+    <!--- AQUI COMEÇA BODY -->
+
+    <!--  <h1> English Practice</h1>-->
+
+    <!--  <p>Selecione uma palavra ou frase para praticar</p>  -->
+
+    <div class="container">
+
+        <div class="card">
+
+            <textarea class="texto" id="textoUsuario" placeholder="Digite uma palavra ou frase em inglês..."></textarea>
+
+            <div class="instrucao">
+
+                👆 Selecione uma palavra ou frase acima.
+
+            </div>
+
+            <div class="acoes-texto">
+
+                <button class="btn-colar" onclick="colarTexto()">
+                    📋 Colar
+                </button>
+
+                <button class="btn-limpar" onclick="limparTexto()">
+                    🗑️ Limpar
+                </button>
+
+                <button class="btn-selecionar" onclick="selecionarTexto()">
+                    ☑️ Selecionar tudo
+                </button>
+
+                <!-- Botão para salvar a palavra ou frase selecionada -->
+                <button class="btn-salvar" onclick="salvarFavorito()">
+                    💾 Salvar
+                </button>
+
+
+            </div>
+
+            <button class="btn-traduzir" onclick="traduzir()">
+
+                🌎 Traduzir
+
+            </button>
+
+
+            <div class="controle-idioma">
+
+                <button class="btn-ingles" onclick="ouvirIngles()">
+
+                    🇺🇸 🔊 Ouvir Inglês
+
+                </button>
+
+                <button class="btn-portugues" onclick="ouvirPortugues()">
+
+                    🇧🇷 🔊 Ouvir Português
+
+                </button>
+
+            </div>
+
+            <div class="controle-acoes">
+
+                <div class="controle-velocidade">
+                    <span>Speed</span>
+
+                    <button onclick="diminuirVelocidade()">
+
+                        ➖
+                    </button>
+
+                    <span id="velocidade">
+                        0,8x
+                    </span>
+
+                    <button onclick="aumentarVelocidade()">
+                        ➕
+                    </button>
+                </div>
+
+                <!-- BOTÃO DE REPETIÇÃO DA FALA-->
+                <div class="controle-repeticao">
+
+                    <button id="btn-repetir">
+
+                        ▶️Repetir
+
+                    </button>
+
+                    <button id="btn-parar">
+                        ⏸️Parar
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card resultado">
+
+            <div class="rotulo-selecionado">
+
+                TEXTO SELECIONADO
+
+            </div>
+
+            <div id="selecionado" class="selecionado">
+
+                Nenhum texto selecionado
+
+            </div>
+
+
+            <div class="rotulo-traducao">
+
+                TRADUÇÃO
+
+            </div>
+
+            <div id="traducao" class="traducao">
+
+                A tradução aparecerá aqui
+
+            </div>
+
+        </div>
+
+        <!--=========PAGINA ESCONDIDA PALAVRAS SALVAS==================================================-->
+
+        <div id="cartao-palavra" class="card palavra-card escondido">
+
+            <span class="palavra-salva">⭐ Palavras Salvas</span>
+
+            <hr style="border:1px solid red;">
+
+            <!-- Card das palavras favoritas -->
+            <div class="card-favoritos">
+
+                <!-- Título da área de favoritos -->
+
+                <!--
+         Aqui o JavaScript vai colocar
+         todas as palavras e frases favoritas. -->
+
+                <div id="listaFavoritos">
+
+                    <!-- Mensagem inicial enquanto não houver favoritos -->
+                    <p>Nenhuma Palavra Salva</p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- para conectar o java com html -->
+    <script src="app.js"></script>
+
+</body>
+
+</html>
