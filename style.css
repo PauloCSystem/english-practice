@@ -133,6 +133,15 @@ body {
   padding: 20px;
 }
 
+#cartao-palavra,
+#pagina-revisao,
+#pagina-quiz {
+  max-width: 600px;
+  margin: auto;
+  padding: 22px;
+  margin-top: 40px;
+}
+
 header {
   background: #1565c0;
   color: white;
@@ -145,7 +154,7 @@ header {
   display: flex;
   justify-content: center;
   gap: 5px;
-  padding: 10px;
+  padding: 15px;
   overflow-x: auto;
   border-bottom: 1.5px solid #a0c2ed;
 }
@@ -354,7 +363,7 @@ button:active {
   color: #0b57d0;
 }
 .escondido {
-  /*display: none; */
+  display: none;
   margin-top: 15px;
 }
 /*-- ESTA ESCONDIDO DENTRO DA PALAVRA SALVA --*/
@@ -389,7 +398,7 @@ linhaFavorito {
   color: white;
   border: none;
   padding: 8px 15px;
-  margin-right: 20px;
+  margin-right: 60px;
   border-radius: 4px;
   cursor: pointer;
 }
