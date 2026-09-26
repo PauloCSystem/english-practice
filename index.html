@@ -58,7 +58,7 @@
 
     <!--  <p>Selecione uma palavra ou frase para praticar</p>  -->
 
-    <div class="container">
+    <div id="pagina-inicio" class="container">
 
         <div class="card">
 
@@ -182,33 +182,63 @@
 
         </div>
 
-        <!--=========PAGINA ESCONDIDA PALAVRAS SALVAS==================================================-->
+    </div>
+    <!--=========PAGINA ESCONDIDA PALAVRAS SALVAS==================================================-->
 
-        <div id="cartao-palavra" class="card palavra-card escondido">
+    <div id="cartao-palavra" class="card palavra-card escondido">
 
-            <span class="palavra-salva">⭐ Palavras Salvas</span>
+        <span class="palavra-salva">⭐ Palavras Salvas</span>
 
-            <hr style="border:1px solid red;">
+        <hr style="border:1px solid red;">
 
-            <!-- Card das palavras favoritas -->
-            <div class="card-favoritos">
+        <!-- Card das palavras favoritas -->
+        <div class="card-favoritos">
 
-                <!-- Título da área de favoritos -->
+            <!-- Título da área de favoritos -->
 
-                <!--
+            <!--
          Aqui o JavaScript vai colocar
          todas as palavras e frases favoritas. -->
 
-                <div id="listaFavoritos">
+            <div id="listaFavoritos">
 
-                    <!-- Mensagem inicial enquanto não houver favoritos -->
-                    <p>Nenhuma Palavra Salva</p>
-
-                </div>
+                <!-- Mensagem inicial enquanto não houver favoritos -->
+                <p>Nenhuma Palavra Salva</p>
 
             </div>
 
         </div>
+
+    </div>
+
+
+    <!-- =====================================================
+     PÁGINA DE REVISÃO
+     ===================================================== -->
+
+    <div id="pagina-revisao" class="card escondido">
+
+        <h2>🔄 Revisão</h2>
+
+        <p>
+            Aqui ficará a revisão das suas palavras salvas.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+     PÁGINA DO QUIZ
+     ===================================================== -->
+
+    <div id="pagina-quiz" class="card escondido">
+
+        <h2>🧠 Quiz</h2>
+
+        <p>
+            Aqui ficará o seu Quiz de Inglês.
+        </p>
+
     </div>
 
     <!-- para conectar o java com html -->
