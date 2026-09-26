@@ -572,6 +572,51 @@ document.getElementById("btn-parar").addEventListener("click", pararLeitura);
 // Executa a função assim que o JavaScript termina de carregar.
 mostrarFavoritos();
 
-/* =========================================================
-   NAVEGAÇÃO ENTRE PÁGINAS
-   ========================================================= */
+// ============================================================
+// NAVEGAÇÃO ENTRE PÁGINAS
+// ============================================================
+
+// Função responsável por mostrar uma página e esconder as outras.
+function mostrarPagina(pagina) {
+
+  // Pega a página inicial.
+  const inicio = document.getElementById("pagina-inicio");
+
+  // Pega a página de palavras salvas.
+  const palavras = document.getElementById("cartao-palavra");
+
+  // Pega a página de revisão.
+  const revisao = document.getElementById("pagina-revisao");
+
+  // Pega a página do quiz.
+  const quiz = document.getElementById("pagina-quiz");
+
+  // Primeiro esconde todas as páginas.
+  inicio.classList.add("escondido");
+  palavras.classList.add("escondido");
+  revisao.classList.add("escondido");
+  quiz.classList.add("escondido");
+
+  // Verifica qual página o usuário escolheu.
+  if (pagina === "inicio") {
+
+    // Mostra a página inicial.
+    inicio.classList.remove("escondido");
+
+  } else if (pagina === "palavras") {
+
+    // Mostra a página de palavras salvas.
+    palavras.classList.remove("escondido");
+
+    // Atualiza a lista de favoritos.
+    mostrarFavoritos();
+  } else if (pagina === "revisao") {
+
+    // Mostra a página de revisão.
+    revisao.classList.remove("escondido");
+  } else if (pagina === "quiz") {
+
+    // Mostra a página do Quiz.
+    quiz.classList.remove("escondido");
+  }
+}
