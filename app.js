@@ -9,8 +9,8 @@ let textoSelecionado = "";
 let textoTraduzido = "";
 
 // Define a velocidade inicial da fala.
-// 0.8 significa 80% da velocidade normal.
-let velocidadeFala = 0.8;
+// 0.6 significa 60% da velocidade normal.
+let velocidadeFala = 0.6;
 
 // Guarda o identificador do intervalo usado pela repetição.
 let intervaloRepeticao = null;
@@ -24,6 +24,19 @@ let botaoFavoritoFalando = null;
 
 // Guarda a fala atual do favorito.
 let falaFavoritoAtual = null;
+
+// Histórico da conversa com a Sol.
+// Cada item registra quem enviou a mensagem e o conteúdo dela.
+const historicoSol = [
+  {
+    // "assistant" identifica uma mensagem enviada pela Sol.
+    role: "assistant",
+
+    // Mensagem inicial que também aparece no HTML.
+    // O histórico permite que a IA considere essa saudação na conversa.
+    content: "Hello, Paulo! How are you today?",
+  },
+];
 
 // ============================================================
 // FUNÇÃO PARA PEGAR O TEXTO SELECIONADO
@@ -578,7 +591,6 @@ mostrarFavoritos();
 
 // Função responsável por mostrar uma página e esconder as outras.
 function mostrarPagina(pagina) {
-
   // Pega a página inicial.
   const inicio = document.getElementById("pagina-inicio");
 
@@ -591,32 +603,142 @@ function mostrarPagina(pagina) {
   // Pega a página do quiz.
   const quiz = document.getElementById("pagina-quiz");
 
+  const sol = document.getElementById("pagina-sol");
+
   // Primeiro esconde todas as páginas.
   inicio.classList.add("escondido");
   palavras.classList.add("escondido");
   revisao.classList.add("escondido");
   quiz.classList.add("escondido");
+  sol.classList.add("escondido");
 
   // Verifica qual página o usuário escolheu.
   if (pagina === "inicio") {
-
     // Mostra a página inicial.
     inicio.classList.remove("escondido");
-
   } else if (pagina === "palavras") {
-
     // Mostra a página de palavras salvas.
     palavras.classList.remove("escondido");
 
     // Atualiza a lista de favoritos.
     mostrarFavoritos();
   } else if (pagina === "revisao") {
-
     // Mostra a página de revisão.
     revisao.classList.remove("escondido");
   } else if (pagina === "quiz") {
-
     // Mostra a página do Quiz.
     quiz.classList.remove("escondido");
+  } else if (pagina === "sol") {
+    // Mostra a página Sol.
+    sol.classList.remove("escondido");
+  }
+}
+
+// =====================================================
+// FUNÇÃO DA SOL - PRIMEIRO TESTE DE CONVERSAÇÃO
+// =====================================================
+async function enviarMensagemSol() {
+  const campoMensagem = document.getElementById("mensagemUsuario");
+  const areaConversa = document.getElementById("area-conversa-sol");
+  const botaoEnviar = document.getElementById("btn-enviar-sol");
+  const mensagem = campoMensagem.value.trim();
+
+  if (!mensagem) return;
+
+  // Mostra a mensagem do usuário como texto, sem interpretar HTML.
+  const blocoUsuario = document.createElement("div");
+  blocoUsuario.className = "mensagem-usuario";
+
+  const tituloUsuario = document.createElement("strong");
+  tituloUsuario.textContent = "👤 Você:";
+
+  const textoUsuario = document.createElement("p");
+  textoUsuario.textContent = mensagem;
+
+  blocoUsuario.append(tituloUsuario, textoUsuario);
+  areaConversa.appendChild(blocoUsuario);
+
+  historicoSol.push({
+    role: "user",
+    content: mensagem,
+  });
+
+  campoMensagem.value = "";
+  campoMensagem.disabled = true;
+  botaoEnviar.disabled = true;
+  botaoEnviar.textContent = "☀️ Sol está pensando...";
+
+  const mensagemCarregando = document.createElement("div");
+  mensagemCarregando.className = "mensagem-sol";
+
+  const textoCarregando = document.createElement("p");
+  textoCarregando.textContent = "Sol está pensando...";
+  mensagemCarregando.appendChild(textoCarregando);
+  areaConversa.appendChild(mensagemCarregando);
+  areaConversa.scrollTop = areaConversa.scrollHeight;
+
+  try {
+    const resposta = await fetch(
+      "https://sol-english-practice.paulinho7joias.workers.dev/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: historicoSol,
+        }),
+      },
+    );
+
+    const dados = await resposta.json();
+    mensagemCarregando.remove();
+
+    if (!resposta.ok) {
+      throw new Error(dados.error || "Não foi possível falar com a Sol.");
+    }
+
+    const respostaSol = dados.reply;
+
+    historicoSol.push({
+      role: "assistant",
+      content: respostaSol,
+    });
+
+    const blocoSol = document.createElement("div");
+    blocoSol.className = "mensagem-sol";
+
+    const tituloSol = document.createElement("strong");
+    tituloSol.textContent = "☀️ Sol:";
+
+    const textoSol = document.createElement("p");
+    textoSol.textContent = respostaSol;
+
+    blocoSol.append(tituloSol, textoSol);
+    areaConversa.appendChild(blocoSol);
+  } catch (erro) {
+    mensagemCarregando.remove();
+
+    // Remove a mensagem do histórico para ela não ser enviada como
+    // se tivesse recebido uma resposta da Sol.
+    historicoSol.pop();
+
+    const avisoErro = document.createElement("div");
+    avisoErro.className = "mensagem-sol";
+
+    const textoErro = document.createElement("p");
+    textoErro.textContent = erro.message || "Erro de conexão. Tente novamente.";
+
+    avisoErro.appendChild(textoErro);
+    areaConversa.appendChild(avisoErro);
+
+    // Restaura a mensagem para o usuário poder tentar novamente.
+    campoMensagem.value = mensagem;
+  } finally {
+    campoMensagem.disabled = false;
+    botaoEnviar.disabled = false;
+    botaoEnviar.textContent = "💬 Enviar";
+    campoMensagem.focus();
+    areaConversa.scrollTop = areaConversa.scrollHeight;
   }
 }
