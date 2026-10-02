@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="imagem/favicon.ico" type="image/x-icon">
-    <title>English Pratice</title>
+    <link rel="shortcut icon" href="imagem/favicon.ico" type="image/x-icon"> <!-- ICONE NA ABA DO SITE -->
+    <link rel="manifest" href="manifest.json"> <!-- PARA CONFIGURAR O ICONE ATALHO CELULAR ANDROID -->
+    <link rel="apple-touch-icon" href="imagem/apple-touch-icon.png">
+    <!-- PARA CONFIGURAR O ICONE ATALHO CELULAR APPLE -->
+    <title>English Practice</title>
 
 </head>
 
@@ -18,7 +21,7 @@
                 <!-- <img src="imagem/icoAppIng.png" alt="Ícone Pronúncia Master" class="header-logo"> -->
                 <img src="imagem/icoAppIng.png" alt="logotipo" style=" width:65px; height:65px;">
                 <div class="brand-text">
-                    <span class="brand-title">English Pratice</span>
+                    <span class="brand-title">English Practice</span>
                     <span class="brand-subtitle">Inglês Americano</span>
                 </div>
             </div>
@@ -30,28 +33,31 @@
                 <a href="#perfil" class="nav-link nav-btn">Meu Perfil</a>
             </nav>
         </div>
-    </header>
 
-    <!-- =====================================================
+
+        <!-- =====================================================
          MENU PRINCIPAL
          ===================================================== -->
 
-    <nav class="menu">
+        <nav class="menu">
 
-        <!-- Botão que abre a página inicial -->
-        <button onclick="mostrarPagina('inicio')">🏠 Início</button>
+            <!-- Botão que abre a página inicial -->
+            <button onclick="mostrarPagina('inicio')">🏠 Início</button>
 
-        <!-- Botão das palavras salvas -->
-        <button onclick="mostrarPagina('palavras')">⭐ Minhas palavras</button>
+            <!-- Botão das palavras salvas -->
+            <button onclick="mostrarPagina('palavras')">⭐ Minhas palavras</button>
 
-        <!-- Botão da revisão -->
-        <button onclick="mostrarPagina('revisao')">🔄 Revisão </button>
+            <!-- Botão da revisão -->
+            <button onclick="mostrarPagina('revisao')">🔄 Revisão </button>
 
-        <!-- Botão do quiz -->
-        <button onclick="mostrarPagina('quiz')">🧠 Quiz </button>
+            <!-- Botão do quiz -->
+            <button onclick="mostrarPagina('quiz')">🧠 Quiz </button>
 
-    </nav>
+            <!-- Botão da Sol -->
+            <button onclick="mostrarPagina('sol')">☀️ Sol</button>
 
+        </nav>
+    </header>
     <!--- AQUI COMEÇA BODY -->
 
     <!--  <h1> English Practice</h1>-->
@@ -126,7 +132,7 @@
                     </button>
 
                     <span id="velocidade">
-                        0,8x
+                        0,6x
                     </span>
 
                     <button onclick="aumentarVelocidade()">
@@ -241,7 +247,43 @@
 
     </div>
 
-    <!-- para conectar o java com html -->
+    <!-- =====================================================
+     PÁGINA DA SOL - CONVERSAÇÃO
+     ===================================================== -->
+
+    <div id="pagina-sol" class="card escondido">
+
+        <!-- Título da Sol -->
+        <h2>☀️ Sol</h2>
+
+        <!-- Apresentação -->
+        <p>Sua parceira de conversação em inglês.</p>
+
+        <hr style="border:1px solid red;">
+
+        <!-- Área onde aparecerá a conversa -->
+        <div id="area-conversa-sol">
+
+            <!-- Primeira mensagem da Sol -->
+            <div class="mensagem-sol">
+                <strong>☀️ Sol:</strong>
+
+                <p>Hello, Paulo! How are you today?</p>
+            </div>
+
+        </div>
+
+        <!-- Área para escrever a mensagem -->
+        <textarea id="mensagemUsuario" class="texto" placeholder="Digite sua mensagem em inglês..."> </textarea>
+
+        <!-- Botão para enviar -->
+        <button id="btn-enviar-sol" class="btn-traduzir" onclick="enviarMensagemSol()">
+            💬 Enviar
+        </button>
+
+    </div>
+
+    <!-- ========== PARA CONECTAR O JAVA COM HTML =============== -->
     <script src="app.js"></script>
 
 </body>
