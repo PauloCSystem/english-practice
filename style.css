@@ -135,7 +135,8 @@ body {
 
 #cartao-palavra,
 #pagina-revisao,
-#pagina-quiz {
+#pagina-quiz,
+#pagina-sol {
   max-width: 600px;
   margin: auto;
   padding: 22px;
@@ -154,9 +155,9 @@ header {
   display: flex;
   justify-content: center;
   gap: 5px;
-  padding: 15px;
+  padding: 10px 0px 0px;
   overflow-x: auto;
-  border-bottom: 1.5px solid #a0c2ed;
+  border-top: 1.5px solid #a0c2ed;
 }
 
 .menu button {
@@ -401,4 +402,15 @@ linhaFavorito {
   margin-right: 60px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+h2 {
+  margin: 0px 0px 10px;
+}
+
+.mensagem-sol,
+.mensagem-usuario {
+  margin-bottom: 20px;
+  padding: 10px;
+  color: #fff;
 }
