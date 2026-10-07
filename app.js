@@ -727,7 +727,26 @@ async function enviarMensagemSol() {
     avisoErro.className = "mensagem-sol";
 
     const textoErro = document.createElement("p");
-    textoErro.textContent = erro.message || "Erro de conexão. Tente novamente.";
+
+    // Guarda o erro recebido e transforma o texto em letras minúsculas.
+    const erroRecebido = String(erro.message || "").toLowerCase();
+
+    // Verifica se o erro parece ser de limite ou da API Gemini.
+    const limiteOuErroDaIA =
+      erroRecebido.includes("429") ||
+      erroRecebido.includes("quota") ||
+      erroRecebido.includes("gemini") ||
+      erroRecebido.includes("resource_exhausted");
+
+    // Escolhe uma mensagem fácil de entender para mostrar na conversa.
+    if (limiteOuErroDaIA) {
+      textoErro.textContent =
+        "A Sol não conseguiu responder agora. O serviço de IA pode ter atingido o limite de uso. Tente novamente mais tarde.";
+    } else {
+      // Mostra uma mensagem simples para outros problemas, como falha de conexão.
+      textoErro.textContent =
+        "Não consegui conectar com a Sol. Verifique sua internet e tente novamente.";
+    }
 
     avisoErro.appendChild(textoErro);
     areaConversa.appendChild(avisoErro);
