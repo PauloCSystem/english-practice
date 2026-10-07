@@ -274,6 +274,10 @@ p {
   color: white;
 }
 
+#btn-enviar-sol {
+  width: 70%;
+}
+
 .btn-ingles {
   background: #fbbf24;
 }
@@ -408,9 +412,65 @@ h2 {
   margin: 0px 0px 10px;
 }
 
-.mensagem-sol,
+.mensagem-sol {
+  margin-bottom: 20px;
+  padding: 10px;
+  color: #fff;
+  border-radius: 10px;
+}
+
 .mensagem-usuario {
   margin-bottom: 20px;
   padding: 10px;
   color: #fff;
+  border-radius: 10px;
+  background: #144b8c;
+}
+/* ============================= MICROFONE ===========================*/
+
+#botaoMicrofoneSol {
+  display: inline-flex; /* Deixa a imagem no centro do botão. */
+  align-items: center; /* Centraliza a imagem na altura. */
+  justify-content: center; /* Centraliza a imagem na largura. */
+  width: 56px; /* Define a largura do botão. */
+  height: 56px; /* Define a altura do botão. */
+  padding: 0; /* Remove o espaço de dentro do botão. */
+  border: 0; /* Remove a borda padrão. */
+  border-radius: 50%; /* Deixa o botão redondo. */
+  background: transparent; /* Deixa aparecer a imagem. */
+  cursor: pointer; /* Mostra que o botão pode ser clicado. */
+  margin-top: 20px;
+}
+
+#botaoMicrofoneSol img {
+  display: block; /* Evita espaço sobrando ao redor da imagem. */
+  width: 52px; /* Define a largura da imagem. */
+  height: 52px; /* Define a altura da imagem. */
+  object-fit: contain; /* Mostra a imagem inteira sem esticar. */
+}
+
+#botaoMicrofoneSol:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+#botaoMicrofoneSol.ouvindo {
+  background: #8e1029;
+  animation: pulsoMicrofone 1s infinite;
+}
+
+#statusMicrofoneSol {
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+@keyframes pulsoMicrofone {
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.enviarSolmicrofone {
+  display: flex;
+  gap: 50px;
 }
