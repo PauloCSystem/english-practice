@@ -276,15 +276,29 @@
         <!-- Área para escrever a mensagem -->
         <textarea id="mensagemUsuario" class="texto" placeholder="Digite sua mensagem em inglês..."> </textarea>
 
-        <!-- Botão para enviar -->
-        <button id="btn-enviar-sol" class="btn-traduzir" onclick="enviarMensagemSol()">
-            💬 Enviar
-        </button>
+        <div class="enviarSolmicrofone">
 
-    </div>
+            <!-- Botão para enviar -->
+            <button id="btn-enviar-sol" class="btn-traduzir" onclick="enviarMensagemSol()">
+                💬 Enviar
+            </button>
+            <button id="botaoMicrofoneSol" type="button" aria-label="Falar em inglês" aria-pressed="false"
+                title="Fale com a Sol">
 
-    <!-- ========== PARA CONECTAR O JAVA COM HTML =============== -->
-    <script src="app.js"></script>
+                <!-- Mostra a imagem Microfone.png, que precisa estar junto do arquivo HTML. -->
+                <img src="imagem/Microfone.png" alt="Microfone" width="52" height="52">
+            </button>
+
+        </div>
+
+        <span id="statusMicrofoneSol" role="status" aria-live="polite"></span>
+
+
+
+
+
+        <!-- ========== PARA CONECTAR O JAVA COM HTML =============== -->
+        <script src="app.js"></script>
 
 </body>
 
