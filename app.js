@@ -742,3 +742,122 @@ async function enviarMensagemSol() {
     areaConversa.scrollTop = areaConversa.scrollHeight;
   }
 }
+
+/* ===================== MICROFONE =================== */
+
+// Procura a caixa onde você escreve para a Sol.
+const campoMensagemMicrofone = document.getElementById("mensagemUsuario");
+
+// Procura o botão que já está no seu index.html.
+const botaoMicrofoneSol = document.getElementById("botaoMicrofoneSol");
+
+// Procura o lugar onde aparecerão avisos sobre o microfone.
+const statusMicrofoneSol = document.getElementById("statusMicrofoneSol");
+
+// Tenta encontrar o recurso de reconhecimento de voz do navegador.
+const ReconhecimentoDeVoz =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+// Só continua se os três elementos e o recurso de voz existirem.
+if (
+  campoMensagemMicrofone &&
+  botaoMicrofoneSol &&
+  statusMicrofoneSol &&
+  ReconhecimentoDeVoz
+) {
+  // Cria o reconhecedor, que transforma sua fala em texto.
+  const reconhecimentoSol = new ReconhecimentoDeVoz();
+
+  // Diz ao navegador que você vai falar em inglês americano.
+  reconhecimentoSol.lang = "en-US";
+
+  // Faz o navegador parar de ouvir quando você terminar de falar.
+  reconhecimentoSol.continuous = false;
+
+  // Mostra o botão como não pressionado no começo.
+  botaoMicrofoneSol.setAttribute("aria-pressed", "false");
+
+  // Começa a ouvir quando você toca no botão do microfone.
+  botaoMicrofoneSol.addEventListener("click", () => {
+    // Tenta ligar o microfone.
+    try {
+      // Começa a reconhecer sua fala.
+      reconhecimentoSol.start();
+
+      // Mostra que o microfone está ouvindo.
+      statusMicrofoneSol.textContent = "Estou ouvindo… fale em inglês.";
+    } catch (erro) {
+      // Mostra um aviso se o microfone já estiver ligado.
+      statusMicrofoneSol.textContent =
+        "O microfone já está ligado. Tente falar agora.";
+    }
+  });
+
+  // Acontece quando o navegador começa a ouvir.
+  reconhecimentoSol.onstart = () => {
+    // Marca o botão como pressionado.
+    botaoMicrofoneSol.setAttribute("aria-pressed", "true");
+
+    // Avisa que o microfone está ligado.
+    statusMicrofoneSol.textContent = "Estou ouvindo… fale em inglês.";
+  };
+
+  // Acontece quando o navegador entende o que você falou.
+  reconhecimentoSol.onresult = (evento) => {
+    // Pega as palavras reconhecidas e tira espaços sobrando.
+    const falaReconhecida =
+      evento.results[evento.results.length - 1][0].transcript.trim();
+
+    // Para se o navegador não tiver entendido nenhuma palavra.
+    if (!falaReconhecida) return;
+
+    // Coloca o que você falou na caixa de mensagem.
+    campoMensagemMicrofone.value = falaReconhecida;
+
+    // Avisa que a fala foi entendida.
+    statusMicrofoneSol.textContent = "Entendi! Enviando sua fala para a Sol.";
+
+    // Envia a fala usando a função de envio que já existe no seu app.js.
+    enviarMensagemSol();
+  };
+
+  // Acontece se o navegador encontrar um problema com o microfone.
+  reconhecimentoSol.onerror = (evento) => {
+    // Prepara avisos simples para alguns problemas comuns.
+    const avisosMicrofone = {
+      "not-allowed":
+        "Permita o uso do microfone nas configurações do navegador.",
+      "no-speech": "Não ouvi sua voz. Toque no microfone e tente novamente.",
+      network: "A conexão falhou durante o reconhecimento da fala.",
+    };
+
+    // Mostra o aviso correspondente ou um aviso geral.
+    statusMicrofoneSol.textContent =
+      avisosMicrofone[evento.error] ||
+      "Não consegui ouvir. Tente tocar no microfone novamente.";
+  };
+
+  // Acontece quando o navegador termina de ouvir.
+  reconhecimentoSol.onend = () => {
+    // Marca o botão como não pressionado.
+    botaoMicrofoneSol.setAttribute("aria-pressed", "false");
+  };
+} else {
+  // Procura o botão para poder mostrar um aviso.
+  const botaoMicrofoneSemSuporte = document.getElementById("botaoMicrofoneSol");
+
+  // Procura o lugar onde o aviso será mostrado.
+  const statusMicrofoneSemSuporte =
+    document.getElementById("statusMicrofoneSol");
+
+  // Avisa se o navegador não oferecer reconhecimento de voz.
+  if (statusMicrofoneSemSuporte) {
+    statusMicrofoneSemSuporte.textContent =
+      "Este navegador não oferece reconhecimento de voz. Tente usar o Chrome.";
+  }
+
+  // Desativa o botão se o navegador não souber reconhecer voz.
+  if (botaoMicrofoneSemSuporte) {
+    botaoMicrofoneSemSuporte.disabled = true;
+  }
+}
