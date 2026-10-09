@@ -1,6 +1,3 @@
-// ============================================================
-// VARIÁVEIS PRINCIPAIS DO APLICATIVO
-// ============================================================
 
 // Guarda a palavra ou frase que o usuário selecionou.
 let textoSelecionado = "";
@@ -77,7 +74,7 @@ function pegarSelecao() {
 
 function diminuirVelocidade() {
   // Verifica se a velocidade ainda pode diminuir.
-  if (velocidadeFala > 0.5) {
+  if (velocidadeFala > 0.3) {
     // Diminui a velocidade em 0.1.
     velocidadeFala -= 0.1;
 
@@ -716,8 +713,24 @@ async function enviarMensagemSol() {
 
     blocoSol.append(tituloSol, textoSol);
     areaConversa.appendChild(blocoSol);
+
+    // Cria uma fala usando a resposta que a Sol acabou de enviar.
+    const falaDaSol = new SpeechSynthesisUtterance(respostaSol);
+
+    // Escolhe a voz em inglês americano.
+    falaDaSol.lang = "en-US";
+
+    // Deixa a fala um pouco mais devagar para facilitar o aprendizado.
+    falaDaSol.rate = 0.6;
+
+    // Para uma fala anterior, se ainda estiver tocando.
+    window.speechSynthesis.cancel();
+
+    // Faz o navegador falar a resposta da Sol.
+    window.speechSynthesis.speak(falaDaSol);
   } catch (erro) {
     mensagemCarregando.remove();
+    
 
     // Remove a mensagem do histórico para ela não ser enviada como
     // se tivesse recebido uma resposta da Sol.
@@ -879,4 +892,23 @@ if (
   if (botaoMicrofoneSemSuporte) {
     botaoMicrofoneSemSuporte.disabled = true;
   }
+}
+
+// Procura a caixa onde você escreve para a Sol.
+const campoMensagemEnterSol = document.getElementById("mensagemUsuario");
+
+// Só continua se encontrou a caixa de mensagem.
+if (campoMensagemEnterSol) {
+  // Escuta quando uma tecla é apertada dentro da caixa.
+  campoMensagemEnterSol.addEventListener("keydown", (evento) => {
+    // Confere se a tecla apertada foi Enter.
+    // Shift + Enter fica de fora para permitir pular uma linha.
+    if (evento.key === "Enter" && !evento.shiftKey) {
+      // Impede que Enter crie uma nova linha na caixa.
+      evento.preventDefault();
+
+      // Chama a mesma função usada pelo botão "Enviar".
+      enviarMensagemSol();
+    }
+  });
 }
